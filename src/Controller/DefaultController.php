@@ -12,4 +12,9 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/home.html.twig');
     }
+
+    public function contact()
+    {
+        return $this->render('default/contact.html.twig');
+    }
 }
