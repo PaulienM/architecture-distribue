@@ -5,6 +5,7 @@
     <title>{% block title %}E-Commerce symfony{% endblock %}</title>
     {{ encore_entry_link_tags('style') }}
     {% block stylesheets %}{% endblock %}
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
 </head>
 <body>
 {{ include('navbar.html.twig') }}
