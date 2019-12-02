@@ -9,3 +9,11 @@ contact:
 boutique:
     path: /boutique
     controller: App\Controller\BoutiqueController::index
+
+rayon:
+    path: /rayon/{idCategory}
+    controller: App\Controller\BoutiqueController::rayon
+
+search:
+    path: /recherche/{searchText}
+    controller: App\Controller\BoutiqueController::search
