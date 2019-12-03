@@ -17,3 +17,5 @@ rayon:
 search:
     path: /recherche/{searchText}
     controller: App\Controller\BoutiqueController::search
+    defaults:
+        searchText: ""
