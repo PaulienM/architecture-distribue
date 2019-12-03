@@ -3,19 +3,20 @@
 {% block title "Boutique" %}
 
 {% block body %}
-<h1 class="text-center mt-4">Boutique</h1>
-<div class="row">
-    {% for category in categories %}
-        <div class="col-md-4">
-            <div class="card">
-                <img src="{{ asset(category.visuel) }}" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">{{ category.libelle }}</h5>
-                    <p class="card-text">{{ category.texte }}</p>
-                    <a href="{{ path('rayon', {idCategory: category.id}) }}" class="btn btn-primary">Voir les produits</a>
+    <h1 class="text-center mt-4">Boutique</h1>
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ asset(category.visuel) }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.libelle }}</h5>
+                        <p class="card-text">{{ category.texte }}</p>
+                        <a href="{{ path('rayon', {idCategory: category.id}) }}" class="btn btn-primary">Voir les
+                            produits</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 {% endblock %}
