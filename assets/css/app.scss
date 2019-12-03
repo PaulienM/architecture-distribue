@@ -1,1 +1,23 @@
 @import "~bootstrap/scss/bootstrap";
+
+.home-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.img-home-container {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  max-height: 50vh;
+  margin-bottom: 1rem;
+  filter: brightness(50%)
+}
+
+.text-home-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
