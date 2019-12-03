@@ -2,6 +2,21 @@
 
 {% block title "Contact" %}
 
+{% block beforeContainer %}
+    <div class="home-container">
+        <img src="{{ asset('images/contact.jpg') }}" class="img-fluid img-home-container" alt="image telephone">
+        <div class="text-home-container">
+            <h1>Contactez nous !</h1>
+            <form>
+                <label for="user-mail">Saisissez votre email, nous vous recontactons</label>
+                <div class="d-flex">
+                    <input type="email" class="form-control" id="user-mail" placeholder="exemple@mail.com"/>
+                    <a href="#" class="btn btn-secondary">Envoyer</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
 {% block body %}
-<h1 class="text-center mt-4">Contactez moi</h1>
 {% endblock %}
