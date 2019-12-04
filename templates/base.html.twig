@@ -17,12 +17,5 @@
 </div>
 {{ encore_entry_script_tags('app') }}
 {% block javascripts %}{% endblock %}
-<script type="text/javascript">
-    $('#searchButton').click(function () {
-        let searchText = $('#searchText').val().trim();
-        location = {{ path('search', {searchText: 'encodeURI(searchText)'} ) }};
-        return false;
-    });
-</script>
 </body>
 </html>

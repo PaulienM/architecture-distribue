@@ -17,9 +17,9 @@
                 <a class="nav-link" href="{{ path('contact') }}">{{ 'contact' | trans }}</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" id="searchText" type="search" placeholder="{{ 'navbar.search_product' | trans }}" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" id="searchButton" type="submit"><i class="fas fa-search"></i></button>
+        <form action="{{ path('search') }}" method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" id="searchText" name="search" type="search" placeholder="{{ 'navbar.search_product' | trans }}" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id="searchButton"><i class="fas fa-search"></i></button>
         </form>
         <ul class="navbar-nav">
             <li class="nav-item dropdown">

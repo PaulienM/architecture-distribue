@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Service\BoutiqueService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class BoutiqueController extends AbstractController
 {
@@ -25,8 +26,9 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    public function search(BoutiqueService $boutiqueService, string $searchText)
+    public function search(BoutiqueService $boutiqueService, Request $request)
     {
+        $searchText = $request->get('search');
         $products = $boutiqueService->findProduitsByLibelleOrTexte($searchText);
         return $this->render('boutique/rayon.html.twig', [
             "products" => $products

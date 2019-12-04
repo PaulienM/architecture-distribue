@@ -31,13 +31,12 @@ rayon:
         _locale: 'fr'
 
 search:
-    path: /{_locale}/recherche/{searchText}
+    path: /{_locale}/recherche
     controller: App\Controller\BoutiqueController::search
     requirements:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
-        searchText: ""
 
 panier:
     path: /{_locale}/panier/
