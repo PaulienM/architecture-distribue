@@ -53,6 +53,10 @@
         <source>send</source>
         <target>Envoyer</target>
       </trans-unit>
+      <trans-unit id="L7sLdsQ" resname="navbar.title">
+        <source>navbar.title</source>
+        <target>Accueil</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

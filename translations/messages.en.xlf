@@ -53,6 +53,10 @@
         <source>base.default_body</source>
         <target>To develop...</target>
       </trans-unit>
+      <trans-unit id="L7sLdsQ" resname="navbar.title">
+        <source>navbar.title</source>
+        <target>Home</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
