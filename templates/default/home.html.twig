@@ -7,11 +7,23 @@
     <img src="{{ asset('images/market.jpg') }}" class="img-fluid img-home-container" alt="marché de fruits">
     <div class="text-home-container">
         <h1>Mon e-commerce Symfony</h1>
-        <a href="{{ path("contact") }}" class="btn btn-secondary">Contactez nous !</a>
+        <a href="{{ path("boutique") }}" class="btn btn-secondary">Voir nos produits</a>
     </div>
 </div>
 {% endblock %}
 
 {% block body %}
-
+    <div class="row justify-content-center">
+        <div class="card col-md-3 text-center">
+            <div class="card-title">
+                <span class="big-icon" style="">
+                    <i class="far fa-envelope"></i>
+                </span>
+                <h2>Contact</h2>
+            </div>
+            <div class="card-body">
+                <a href="{{ path('contact') }}" class="btn btn-primary">Nous contacter</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
