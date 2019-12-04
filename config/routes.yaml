@@ -15,15 +15,26 @@ contact:
         _locale: 'fr'
 
 boutique:
-    path: /boutique
+    path: /{_locale}/boutique
     controller: App\Controller\BoutiqueController::index
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
 
 rayon:
-    path: /rayon/{idCategory}
+    path: /{_locale}/rayon/{idCategory}
     controller: App\Controller\BoutiqueController::rayon
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
 
 search:
-    path: /recherche/{searchText}
+    path: /{_locale}/recherche/{searchText}
     controller: App\Controller\BoutiqueController::search
+    requirements:
+        _locale: '%app.supported_locales%'
     defaults:
+        _locale: 'fr'
         searchText: ""
