@@ -1,4 +1,4 @@
-index:
+home:
     path: /{_locale}
     controller: App\Controller\DefaultController::index
     requirements:
@@ -38,3 +38,19 @@ search:
     defaults:
         _locale: 'fr'
         searchText: ""
+
+panier:
+    path: /{_locale}/panier/
+    controller: App\Controller\PanierController::index
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
+
+panier.add:
+    path: /{_locale}/panier/add/{productId}
+    controller: App\Controller\PanierController::addProduct
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
