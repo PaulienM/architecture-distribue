@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}E-Commerce symfony{% endblock %}</title>
+    <title>{% block title %}{{ 'base.default_title' | trans }}{% endblock %}</title>
     {{ encore_entry_link_tags('style') }}
     {% block stylesheets %}{% endblock %}
     <link rel="icon" href="{{ asset('images/favicon.ico') }}">
@@ -12,7 +12,7 @@
 {% block beforeContainer %}{% endblock %}
 <div class="container">
     {% block body %}
-        <h1>A développer...</h1>
+        <h1>{{ 'base.default_body' | trans }}</h1>
     {% endblock %}
 </div>
 {{ encore_entry_script_tags('app') }}

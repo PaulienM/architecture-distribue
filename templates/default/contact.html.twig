@@ -6,12 +6,12 @@
     <div class="home-container">
         <img src="{{ asset('images/contact.jpg') }}" class="img-fluid img-home-container" alt="image telephone">
         <div class="text-home-container">
-            <h1>Contactez nous !</h1>
+            <h1>{{ 'default.contact.contact_us' | trans }}</h1>
             <form>
-                <label for="user-mail">Saisissez votre email, nous vous recontactons</label>
+                <label for="user-mail">{{ 'default.contact.type_mail' | trans }}</label>
                 <div class="d-flex">
                     <input type="email" class="form-control" id="user-mail" placeholder="exemple@mail.com"/>
-                    <a href="#" class="btn btn-secondary">Envoyer</a>
+                    <a href="#" class="btn btn-secondary">{{ 'send' | trans }}</a>
                 </div>
             </form>
         </div>

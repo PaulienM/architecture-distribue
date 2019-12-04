@@ -9,6 +9,50 @@
         <source>default.home.title</source>
         <target>Mon e-commerce Symfony</target>
       </trans-unit>
+      <trans-unit id="ELjFn75" resname="default.home.boutique_button">
+        <source>default.home.boutique_button</source>
+        <target>Voir nos produits</target>
+      </trans-unit>
+      <trans-unit id="4QqyZhh" resname="default.home.contact_us">
+        <source>default.home.contact_us</source>
+        <target>Nous contacter</target>
+      </trans-unit>
+      <trans-unit id="685VTDm" resname="base.default_title">
+        <source>base.default_title</source>
+        <target>E-Commerce symfony</target>
+      </trans-unit>
+      <trans-unit id="_ryIlNY" resname="base.default_body">
+        <source>base.default_body</source>
+        <target>A développer...</target>
+      </trans-unit>
+      <trans-unit id="gk2A1xm" resname="store">
+        <source>store</source>
+        <target>Boutique</target>
+      </trans-unit>
+      <trans-unit id="CT59X9u" resname="contact">
+        <source>contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="qHkhV8t" resname="product">
+        <source>product</source>
+        <target>Produits</target>
+      </trans-unit>
+      <trans-unit id="GKfCLD6" resname="navbar.search_product">
+        <source>navbar.search_product</source>
+        <target>Rechercher un produit...</target>
+      </trans-unit>
+      <trans-unit id="cHHfiI9" resname="default.contact.contact_us">
+        <source>default.contact.contact_us</source>
+        <target>Contactez nous !</target>
+      </trans-unit>
+      <trans-unit id="DkeJaSd" resname="default.contact.type_mail">
+        <source>default.contact.type_mail</source>
+        <target>Saisissez votre email, nous vous recontactons</target>
+      </trans-unit>
+      <trans-unit id="J84dG.Q" resname="send">
+        <source>send</source>
+        <target>Envoyer</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
