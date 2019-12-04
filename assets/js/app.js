@@ -17,9 +17,3 @@ require('@fortawesome/fontawesome-free/js/all.js');
 const $ = require('jquery');
 
 //console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
-
-$('#searchButton').click(function () {
-    let searchText = $('#searchText').val().trim()
-    location = `/recherche/${encodeURI(searchText)}`;
-    return false;
-});
