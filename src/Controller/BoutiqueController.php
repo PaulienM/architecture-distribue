@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Service\BoutiqueService;
+use App\Service\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,11 +19,16 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
-    public function rayon(BoutiqueService $boutiqueService, int $idCategory)
+    public function rayon(BoutiqueService $boutiqueService, PanierService $panierService, int $idCategory)
     {
         $products = $boutiqueService->findProduitsByCategorie($idCategory);
+        $productWithCart = [];
+        foreach ($products as $product) {
+            $product['cart'] = $panierService->findProductNb($product['id']);
+            $productWithCart[] = $product;
+        }
         return $this->render('boutique/rayon.html.twig', [
-            "products" => $products
+            "products" => $productWithCart
         ]);
     }
 

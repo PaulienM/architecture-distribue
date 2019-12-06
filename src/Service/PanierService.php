@@ -54,7 +54,7 @@ class PanierService
 
     public function findProductNb(int $productId)
     {
-        return $this->session->get($productId);
+        return $this->session->get($productId, null);
     }
 
     public function findAllProducts()
