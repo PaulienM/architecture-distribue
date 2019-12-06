@@ -57,6 +57,10 @@
         <source>navbar.title</source>
         <target>Accueil</target>
       </trans-unit>
+      <trans-unit id="HELdwCh" resname="cart">
+        <source>cart</source>
+        <target>Panier</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
