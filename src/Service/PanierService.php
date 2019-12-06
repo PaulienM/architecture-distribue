@@ -36,7 +36,7 @@ class PanierService
     {
         $productNb = $this->session->get($productId);
         if ($productNb !== null) {
-            $this->session->set($productId, $productNb--);
+            $this->session->set($productId, $productNb-1);
         }
     }
 

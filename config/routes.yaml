@@ -53,3 +53,19 @@ panier.add:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
+
+panier.remove.item.one:
+    path: /{_locale}/panier/remove/one/{productId}
+    controller: App\Controller\PanierController::removeOneProduct
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
+
+panier.remove.item.all:
+    path: /{_locale}/panier/remove/all/{productId}
+    controller: App\Controller\PanierController::removeAllOfOneProduct
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'

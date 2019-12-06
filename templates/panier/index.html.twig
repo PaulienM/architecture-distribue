@@ -4,6 +4,7 @@
 
 {% block body %}
     <h1 class="mt-4">Mon panier</h1>
+    {% if panier is not empty %}
     <table class="table">
         <thead>
         <tr>
@@ -21,7 +22,7 @@
                 <td>{{ product.libelle }}</td>
                 <td>{{ product.prix | price }}</td>
                 <td>
-                    <a href="{{ path('panier.add', {productId: product.id}) }}">
+                    <a href="{{ path('panier.remove.item.one', {productId: product.id}) }}">
                         <i class="fa fa-minus mr-2"></i>
                     </a>
                     {{ quantity }}
@@ -30,7 +31,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{ path('panier.add', {productId: product.id}) }}">
+                    <a href="{{ path('panier.remove.item.all', {productId: product.id}) }}">
                         <i class="far fa-trash-alt text-danger"></i>
                     </a>
                 </td>
@@ -38,4 +39,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>Le panier est vide.</p>
+    {% endif %}
 {% endblock %}
