@@ -14,37 +14,37 @@ class PanierController extends AbstractController
         PanierService $panierService,
         BoutiqueService $boutiqueService
     ) {
-        $session = $panierService->findAllProducts();
-        $panier  = [];
-        foreach ($session as $key => $value) {
-            $panier[] = [$boutiqueService->findProduitById($key), $value];
+        $panierWithItems = [];
+        $panier = $panierService->getContenu();
+        foreach ($panier as $id => $quantity) {
+            $panierWithItems[] = ['item' =>$boutiqueService->findProduitById($id), 'quantity' => $quantity];
         }
 
         return $this->render(
             'panier/index.html.twig',
             [
-                "panier" => $panier,
+                "panier" => $panierWithItems,
             ]
         );
     }
 
-    public function addProduct(PanierService $panierService, $productId)
+    public function panierAjouter(PanierService $panierService, $productId)
     {
-        $panierService->addProduct($productId);
+        $panierService->ajouterProduit($productId);
 
         return $this->redirectToRoute('panier');
     }
 
-    public function removeOneProduct(PanierService $panierService, $productId)
+    public function panierEnlever(PanierService $panierService, $productId)
     {
-        $panierService->removeOneProduct($productId);
+        $panierService->enleverProduit($productId);
 
         return $this->redirectToRoute('panier');
     }
 
-    public function removeAllOfOneProduct(PanierService $panierService, $productId)
+    public function panierSupprimer(PanierService $panierService, $productId)
     {
-        $panierService->removeAllOfOneProduct($productId);
+        $panierService->supprimerProduit($productId);
 
         return $this->redirectToRoute('panier');
     }

@@ -46,25 +46,25 @@ panier:
     defaults:
         _locale: 'fr'
 
-panier.add:
+panier.ajouter:
     path: /{_locale}/panier/add/{productId}
-    controller: App\Controller\PanierController::addProduct
+    controller: App\Controller\PanierController::panierAjouter
     requirements:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
 
-panier.remove.item.one:
+panier.enlever:
     path: /{_locale}/panier/remove/one/{productId}
-    controller: App\Controller\PanierController::removeOneProduct
+    controller: App\Controller\PanierController::panierEnlever
     requirements:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
 
-panier.remove.item.all:
+panier.supprimer:
     path: /{_locale}/panier/remove/all/{productId}
-    controller: App\Controller\PanierController::removeAllOfOneProduct
+    controller: App\Controller\PanierController::panierSupprimer
     requirements:
         _locale: '%app.supported_locales%'
     defaults:

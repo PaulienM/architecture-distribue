@@ -24,7 +24,7 @@ class BoutiqueController extends AbstractController
         $products = $boutiqueService->findProduitsByCategorie($idCategory);
         $productWithCart = [];
         foreach ($products as $product) {
-            $product['cart'] = $panierService->findProductNb($product['id']);
+            $product['cart'] = $panierService->getNbProduit($product['id']);
             $productWithCart[] = $product;
         }
         return $this->render('boutique/rayon.html.twig', [

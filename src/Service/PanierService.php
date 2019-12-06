@@ -7,58 +7,130 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PanierService
 {
+    const PANIER_SESSION = 'panier';
+
     /**
      * @var SessionInterface $session
      */
     private $session;
 
     /**
+     * @var BoutiqueService $boutiqueService
+     */
+    private $boutiqueService;
+
+    /**
+     * @var array $panier
+     */
+    private $panier;
+
+    /**
      * PanierService constructor.
      *
      * @param SessionInterface $session
+     * @param BoutiqueService  $boutiqueService
+     * @param array            $panier
      */
-    public function __construct(SessionInterface $session)
-    {
+    public function __construct(
+        SessionInterface $session,
+        BoutiqueService $boutiqueService
+    ) {
         $this->session = $session;
+        $this->boutiqueService = $boutiqueService;
+        $this->panier = $this->session->get(self::PANIER_SESSION, []);
     }
 
-    public function addProduct(int $productId)
+    /**
+     * @return array
+     */
+    public function getContenu(): array
     {
-        $productNb = $this->session->get($productId);
-        if ($productNb !== null) {
-            $this->session->set($productId, $productNb+1);
+        return $this->session->get(self::PANIER_SESSION, []);
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotal(): float
+    {
+        $total = 0;
+        foreach ($this->getContenu() as $item) {
+            $total += $this->boutiqueService->findProduitById($item['id'])['prix'];
+        }
+        return $total;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbProduits(): int
+    {
+        $nbProduits = 0;
+        foreach ($this->getContenu() as $item) {
+            $nbProduits += $item['quantity'];
+        }
+        return $nbProduits;
+    }
+
+    public function getNbProduit(int $productId): int
+    {
+        if (isset($this->getContenu()[$productId])) {
+            return $this->getContenu()[$productId];
         } else {
-            $this->session->set($productId, 1);
+            return 0;
         }
     }
 
-    public function removeOneProduct(int $productId)
+    /**
+     * @param int $idProduit
+     * @param int $quantity
+     */
+    public function ajouterProduit(int $idProduit, int $quantity = 1): void
     {
-        $productNb = $this->session->get($productId);
-        if ($productNb !== null) {
-            $this->session->set($productId, $productNb-1);
+        if (isset($this->panier[$idProduit])) {
+            $initialQuantity = $this->panier[$idProduit];
+        } else {
+            $initialQuantity = null;
         }
-    }
-
-    public function removeAllOfOneProduct(int $productId)
-    {
-        if ($this->session->get($productId) !== null) {
-            $this->session->remove($productId);
+        if ($initialQuantity !== null) {
+            $this->panier[$idProduit] += $quantity;
+        } else {
+            $this->panier[$idProduit] = $quantity;
         }
+        $this->session->set(self::PANIER_SESSION, $this->panier);
     }
 
-    public function removeAllProducts()
+    /**
+     * @param int $idProduit
+     * @param int $quantity
+     */
+    public function enleverProduit(int $idProduit, int $quantity = 1): void
     {
-        $this->session->clear();
+        if (isset($this->panier[$idProduit])) {
+            $initialQuantity = $this->panier[$idProduit];
+        } else {
+            $initialQuantity = 0;
+        }
+        if ($initialQuantity !== null && $initialQuantity > $quantity) {
+            $this->panier[$idProduit] -= $quantity;
+        } else {
+            unset($this->panier[$idProduit]);
+        }
+        $this->session->set(self::PANIER_SESSION, $this->panier);
     }
 
-    public function findProductNb(int $productId)
+    /**
+     * @param int $idProduit
+     */
+    public function supprimerProduit(int $idProduit): void
     {
-        return $this->session->get($productId, null);
+        unset($this->panier[$idProduit]);
+        $this->session->set(self::PANIER_SESSION, $this->panier);
     }
 
-    public function findAllProducts()
+    public function vider(): void
     {
-        return $this->session->all();
+        $this->panier = [];
+        $this->session->set(self::PANIER_SESSION, $this->panier);
     }
 }

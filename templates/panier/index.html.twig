@@ -16,22 +16,22 @@
         </thead>
         <tbody>
         {% for item in panier %}
-            {% set product = item[0] %}
-            {% set quantity = item[1] %}
+            {% set product = item['item'] %}
+            {% set quantity = item['quantity'] %}
             <tr>
                 <td>{{ product.libelle }}</td>
                 <td>{{ product.prix | price }}</td>
                 <td>
-                    <a href="{{ path('panier.remove.item.one', {productId: product.id}) }}">
+                    <a href="{{ path('panier.enlever', {productId: product.id}) }}">
                         <i class="fa fa-minus mr-2"></i>
                     </a>
                     {{ quantity }}
-                    <a href="{{ path('panier.add', {productId: product.id}) }}">
+                    <a href="{{ path('panier.ajouter', {productId: product.id}) }}">
                         <i class="fa fa-plus ml-2"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="{{ path('panier.remove.item.all', {productId: product.id}) }}">
+                    <a href="{{ path('panier.supprimer', {productId: product.id}) }}">
                         <i class="far fa-trash-alt text-danger"></i>
                     </a>
                 </td>

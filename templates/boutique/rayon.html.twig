@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ product.libelle }}</h5>
                     <p class="card-text">{{ product.texte }}</p>
-                    <a href="{{ path('panier.add', { productId: product.id }) }}" class="btn btn-success">Ajouter au panier {{ product.cart ? "("~ product.cart~")":false}}</a>
+                    <a href="{{ path('panier.ajouter', { productId: product.id }) }}" class="btn btn-success">Ajouter au panier {{ product.cart ? "("~ product.cart~")":false}}</a>
                 </div>
                 <div class="card-footer text-muted">
                     {{ product.prix|price }}
