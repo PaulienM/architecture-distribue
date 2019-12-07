@@ -15,7 +15,8 @@ class PanierController extends AbstractController
         BoutiqueService $boutiqueService
     ) {
         $panierWithItems = [];
-        $panier = $panierService->getContenu();
+        $panier          = $panierService->getContenu();
+        $prixTotal       = $panierService->getTotal();
         foreach ($panier as $id => $quantity) {
             $panierWithItems[] = ['item' =>$boutiqueService->findProduitById($id), 'quantity' => $quantity];
         }
@@ -24,6 +25,7 @@ class PanierController extends AbstractController
             'panier/index.html.twig',
             [
                 "panier" => $panierWithItems,
+                "prix"   => $prixTotal,
             ]
         );
     }
