@@ -11,7 +11,7 @@
                 <a class="nav-link" href="{{ path('boutique') }}">{{ 'store' | trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('panier') }}">{{ 'cart' | trans }}</a>
+                <a class="nav-link" href="{{ path('panier') }}">{{ 'cart' | trans }}{{ render(controller('App\\Controller\\PanierController::afficherNavbar')) }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('contact') }}">{{ 'contact' | trans }}</a>

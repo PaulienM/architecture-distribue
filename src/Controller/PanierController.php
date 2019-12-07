@@ -48,4 +48,16 @@ class PanierController extends AbstractController
 
         return $this->redirectToRoute('panier');
     }
+
+    public function afficherNavbar(PanierService $panierService)
+    {
+        $nbProduits = $panierService->getNbProduits();
+
+        return $this->render(
+            'panier/nbProduits_navbar.html.twig',
+            [
+                'nb_produits' => $nbProduits,
+            ]
+        );
+    }
 }
