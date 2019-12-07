@@ -29,7 +29,6 @@ class PanierService
      *
      * @param SessionInterface $session
      * @param BoutiqueService  $boutiqueService
-     * @param array            $panier
      */
     public function __construct(
         SessionInterface $session,
@@ -54,8 +53,8 @@ class PanierService
     public function getTotal(): float
     {
         $total = 0;
-        foreach ($this->getContenu() as $item) {
-            $total += $this->boutiqueService->findProduitById($item['id'])['prix'];
+        foreach ($this->getContenu() as $id => $quantity) {
+            $total += $this->boutiqueService->findProduitById($id)['prix'] * $quantity;
         }
         return $total;
     }
@@ -66,8 +65,8 @@ class PanierService
     public function getNbProduits(): int
     {
         $nbProduits = 0;
-        foreach ($this->getContenu() as $item) {
-            $nbProduits += $item['quantity'];
+        foreach ($this->getContenu() as $quantity) {
+            $nbProduits += $quantity;
         }
         return $nbProduits;
     }
