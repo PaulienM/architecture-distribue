@@ -22,13 +22,9 @@ class BoutiqueController extends AbstractController
     public function rayon(BoutiqueService $boutiqueService, PanierService $panierService, int $idCategory)
     {
         $products = $boutiqueService->findProduitsByCategorie($idCategory);
-        $productWithCart = [];
-        foreach ($products as $product) {
-            $product['cart'] = $panierService->getNbProduit($product['id']);
-            $productWithCart[] = $product;
-        }
+
         return $this->render('boutique/rayon.html.twig', [
-            "products" => $productWithCart
+            "products" => $products
         ]);
     }
 

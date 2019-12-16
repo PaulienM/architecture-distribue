@@ -62,4 +62,16 @@ class PanierController extends AbstractController
             ]
         );
     }
+
+    public function afficherNbProduit(PanierService $panierService, int $productId)
+    {
+        $nbProduit = $panierService->getNbProduit($productId);
+
+        return $this->render(
+            'panier/nbProduits_boutique.html.twig',
+            [
+                'nb_produit' => $nbProduit
+            ]
+        );
+    }
 }
