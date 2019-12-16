@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PanierService
@@ -15,9 +16,9 @@ class PanierService
     private $session;
 
     /**
-     * @var BoutiqueService $boutiqueService
+     * @var ProductRepository $repo
      */
-    private $boutiqueService;
+    private $repo;
 
     /**
      * @var array $panier
@@ -27,15 +28,15 @@ class PanierService
     /**
      * PanierService constructor.
      *
-     * @param SessionInterface $session
-     * @param BoutiqueService  $boutiqueService
+     * @param SessionInterface  $session
+     * @param ProductRepository $repo
      */
     public function __construct(
         SessionInterface $session,
-        BoutiqueService $boutiqueService
+        ProductRepository $repo
     ) {
         $this->session = $session;
-        $this->boutiqueService = $boutiqueService;
+        $this->repo = $repo;
         $this->panier = $this->session->get(self::PANIER_SESSION, []);
     }
 
@@ -54,7 +55,7 @@ class PanierService
     {
         $total = 0;
         foreach ($this->getContenu() as $id => $quantity) {
-            $total += $this->boutiqueService->findProduitById($id)['prix'] * $quantity;
+            $total += $this->repo->findOneById($id)->getPrix() * $quantity;
         }
         return $total;
     }
@@ -87,11 +88,6 @@ class PanierService
     public function ajouterProduit(int $idProduit, int $quantity = 1): void
     {
         if (isset($this->panier[$idProduit])) {
-            $initialQuantity = $this->panier[$idProduit];
-        } else {
-            $initialQuantity = null;
-        }
-        if ($initialQuantity !== null) {
             $this->panier[$idProduit] += $quantity;
         } else {
             $this->panier[$idProduit] = $quantity;

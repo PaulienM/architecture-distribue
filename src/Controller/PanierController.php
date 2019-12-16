@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Product;
 use App\Service\BoutiqueService;
 use App\Service\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,14 +12,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PanierController extends AbstractController
 {
     public function index(
-        PanierService $panierService,
-        BoutiqueService $boutiqueService
+        PanierService $panierService
     ) {
         $panierWithItems = [];
         $panier          = $panierService->getContenu();
         $prixTotal       = $panierService->getTotal();
         foreach ($panier as $id => $quantity) {
-            $panierWithItems[] = ['item' =>$boutiqueService->findProduitById($id), 'quantity' => $quantity];
+            $panierWithItems[] = [
+                'item' => $this->getDoctrine()->getRepository(
+                    Product::class
+                )->findOneById($id),
+                'quantity' => $quantity,
+            ];
         }
 
         return $this->render(
@@ -70,14 +75,16 @@ class PanierController extends AbstractController
         );
     }
 
-    public function afficherNbProduit(PanierService $panierService, int $productId)
-    {
+    public function afficherNbProduit(
+        PanierService $panierService,
+        int $productId
+    ) {
         $nbProduit = $panierService->getNbProduit($productId);
 
         return $this->render(
             'panier/nbProduits_boutique.html.twig',
             [
-                'nb_produit' => $nbProduit
+                'nb_produit' => $nbProduit,
             ]
         );
     }
