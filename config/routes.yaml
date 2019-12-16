@@ -69,3 +69,11 @@ panier.supprimer:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
+
+panier.vider:
+    path: /{_locale}/panier/remove/all
+    controller: App\Controller\PanierController::panierVider
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'

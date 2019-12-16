@@ -51,6 +51,13 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 
+    public function panierVider(PanierService $panierService)
+    {
+        $panierService->vider();
+
+        return $this->redirectToRoute('panier');
+    }
+
     public function afficherNavbar(PanierService $panierService)
     {
         $nbProduits = $panierService->getNbProduits();
