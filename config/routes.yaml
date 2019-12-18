@@ -77,3 +77,19 @@ panier.vider:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
+
+user.accueil:
+    path: /{_locale}/user/
+    controller: App\Controller\UserController::index
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
+
+user.inscription:
+    path: /{_locale}/user/new
+    controller: App\Controller\UserController::new
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
