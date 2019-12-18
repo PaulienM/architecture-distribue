@@ -23,7 +23,9 @@ class PanierController extends AbstractController
         }
         foreach ($panier as $id => $quantity) {
             $panierWithItems[] = [
-                'item'     => $item,
+                'item' => $this->getDoctrine()->getRepository(
+                    Product::class
+                )->findOneById($id),
                 'quantity' => $quantity,
             ];
         }
