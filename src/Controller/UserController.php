@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -16,14 +17,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
+    /**
      * @param UserRepository $userRepository
      *
      * @return Response
      */
     public function index(UserRepository $userRepository): Response
     {
+        $userSessionId = $this->session->get('user');
+        if (!$userSessionId) {
+            $user = null;
+        } else {
+            $user = $userRepository->findOneById($userSessionId);
+        }
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'user' => $user,
         ]);
     }
 
@@ -43,7 +60,9 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_index');
+            $this->session->set('user', $user->getId());
+
+            return $this->redirectToRoute('user.accueil');
         }
 
         return $this->render('user/new.html.twig', [

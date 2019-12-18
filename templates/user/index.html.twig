@@ -1,43 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Utilisateur{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
+    <h1>Utilisateur</h1>
+    <div class="jumbotron">
+        {% if user is not null %}
+            <h2>Bonjour {{ user.prenom }} {{ user.nom }}</h2>
         {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <h2>Aucun utilisateur trouvé</h2>
+        {% endif %}
+        <a href="{{ path('user.inscription') }}" class="btn btn-primary">Nouvel utilisateur</a>
+    </div>
 
-    <a href="{{ path('user.inscription') }}">Create new</a>
 {% endblock %}
