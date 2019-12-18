@@ -4,6 +4,7 @@
 namespace App\Service;
 
 use App\Repository\ProductRepository;
+use Exception;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PanierService
@@ -50,11 +51,13 @@ class PanierService
 
     /**
      * @return float
+     * @throws Exception
      */
     public function getTotal(): float
     {
         $total = 0;
         foreach ($this->getContenu() as $id => $quantity) {
+            $this->verifierProduitExiste($id);
             $total += $this->repo->findOneById($id)->getPrix() * $quantity;
         }
         return $total;
@@ -84,9 +87,12 @@ class PanierService
     /**
      * @param int $idProduit
      * @param int $quantity
+     *
+     * @throws Exception
      */
     public function ajouterProduit(int $idProduit, int $quantity = 1): void
     {
+        $this->verifierProduitExiste($idProduit);
         if (isset($this->panier[$idProduit])) {
             $this->panier[$idProduit] += $quantity;
         } else {
@@ -98,9 +104,12 @@ class PanierService
     /**
      * @param int $idProduit
      * @param int $quantity
+     *
+     * @throws Exception
      */
     public function enleverProduit(int $idProduit, int $quantity = 1): void
     {
+        $this->verifierProduitExiste($idProduit);
         if (isset($this->panier[$idProduit])) {
             $initialQuantity = $this->panier[$idProduit];
         } else {
@@ -116,9 +125,12 @@ class PanierService
 
     /**
      * @param int $idProduit
+     *
+     * @throws Exception
      */
     public function supprimerProduit(int $idProduit): void
     {
+        $this->verifierProduitExiste($idProduit);
         unset($this->panier[$idProduit]);
         $this->session->set(self::PANIER_SESSION, $this->panier);
     }
@@ -127,5 +139,17 @@ class PanierService
     {
         $this->panier = [];
         $this->session->set(self::PANIER_SESSION, $this->panier);
+    }
+
+    /**
+     * @param int $productId
+     *
+     * @throws Exception
+     */
+    private function verifierProduitExiste(int $productId)
+    {
+        if (!$this->repo->findOneById($productId)) {
+            throw new Exception('Le produit n\'existe pas');
+        }
     }
 }

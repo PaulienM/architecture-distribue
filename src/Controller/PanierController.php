@@ -16,12 +16,14 @@ class PanierController extends AbstractController
     ) {
         $panierWithItems = [];
         $panier          = $panierService->getContenu();
-        $prixTotal       = $panierService->getTotal();
+        try {
+            $prixTotal = $panierService->getTotal();
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
         foreach ($panier as $id => $quantity) {
             $panierWithItems[] = [
-                'item' => $this->getDoctrine()->getRepository(
-                    Product::class
-                )->findOneById($id),
+                'item'     => $item,
                 'quantity' => $quantity,
             ];
         }
@@ -37,21 +39,33 @@ class PanierController extends AbstractController
 
     public function panierAjouter(PanierService $panierService, $productId)
     {
-        $panierService->ajouterProduit($productId);
+        try {
+            $panierService->ajouterProduit($productId);
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
 
         return $this->redirectToRoute('panier');
     }
 
     public function panierEnlever(PanierService $panierService, $productId)
     {
-        $panierService->enleverProduit($productId);
+        try {
+            $panierService->enleverProduit($productId);
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
 
         return $this->redirectToRoute('panier');
     }
 
     public function panierSupprimer(PanierService $panierService, $productId)
     {
-        $panierService->supprimerProduit($productId);
+        try {
+            $panierService->supprimerProduit($productId);
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
 
         return $this->redirectToRoute('panier');
     }
