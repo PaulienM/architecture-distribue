@@ -32,7 +32,7 @@ class Commande
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $statut;
+    private $statut = 'commandé';
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\LigneCommande", mappedBy="commande")

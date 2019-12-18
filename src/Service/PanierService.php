@@ -3,7 +3,11 @@
 
 namespace App\Service;
 
+use App\Entity\Commande;
+use App\Entity\LigneCommande;
+use App\Entity\User;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManager;
 use Exception;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -27,6 +31,11 @@ class PanierService
     private $panier;
 
     /**
+     * @var EntityManager
+     */
+    private $em;
+
+    /**
      * PanierService constructor.
      *
      * @param SessionInterface  $session
@@ -34,11 +43,13 @@ class PanierService
      */
     public function __construct(
         SessionInterface $session,
-        ProductRepository $repo
+        ProductRepository $repo,
+        EntityManager $em
     ) {
         $this->session = $session;
         $this->repo = $repo;
         $this->panier = $this->session->get(self::PANIER_SESSION, []);
+        $this->em = $em;
     }
 
     /**
@@ -150,6 +161,30 @@ class PanierService
     {
         if (!$this->repo->findOneById($productId)) {
             throw new Exception('Le produit n\'existe pas');
+        }
+    }
+
+    public function panierToCommande(User $user)
+    {
+        $contenu = $this->getContenu();
+        if (!empty($contenu)) {
+            $commande = new Commande();
+            $commande->setDateCommande(new \DateTime());
+            $commande->setUser($user);
+            foreach ($contenu as $productId => $quantity) {
+                $product = $this->repo->find($productId);
+                if ($product) {
+                    $ligneCommande = new LigneCommande();
+                    $ligneCommande->setPrix($product->getPrix());
+                    $ligneCommande->setProduct($product);
+                    $ligneCommande->setQuantite($quantity);
+                    $commande->addLigneCommande($ligneCommande);
+                    $this->em->persist($ligneCommande);
+                }
+            }
+            $this->em->persist($commande);
+            $this->em->flush();
+            $this->vider();
         }
     }
 }
