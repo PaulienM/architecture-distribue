@@ -61,6 +61,18 @@
         <source>cart</source>
         <target>Cart</target>
       </trans-unit>
+      <trans-unit id="BPiZbad" resname="user">
+        <source>user</source>
+        <target>User</target>
+      </trans-unit>
+      <trans-unit id="mvIRMps" resname="account">
+        <source>account</source>
+        <target>Account</target>
+      </trans-unit>
+      <trans-unit id="KcnDDgY" resname="registration">
+        <source>registration</source>
+        <target>Registration</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

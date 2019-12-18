@@ -61,6 +61,18 @@
         <source>cart</source>
         <target>Panier</target>
       </trans-unit>
+      <trans-unit id="BPiZbad" resname="user">
+        <source>__user</source>
+        <target>Utilisateur</target>
+      </trans-unit>
+      <trans-unit id="mvIRMps" resname="account">
+        <source>__account</source>
+        <target>Compte</target>
+      </trans-unit>
+      <trans-unit id="KcnDDgY" resname="registration">
+        <source>__registration</source>
+        <target>Inscription</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
