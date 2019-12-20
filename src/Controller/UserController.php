@@ -32,16 +32,10 @@ class UserController extends AbstractController
      *
      * @return Response
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(): Response
     {
-        $userSessionId = $this->session->get('user');
-        if (!$userSessionId) {
-            $user = null;
-        } else {
-            $user = $userRepository->findOneById($userSessionId);
-        }
         return $this->render('user/index.html.twig', [
-            'user' => $user,
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -62,8 +56,6 @@ class UserController extends AbstractController
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
-
-            $this->session->set('user', $user->getId());
 
             return $this->redirectToRoute('user.accueil');
         }
