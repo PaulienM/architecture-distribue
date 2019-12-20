@@ -117,35 +117,4 @@ class Product
 
         return $this;
     }
-
-    /**
-     * @return Collection|LigneCommande[]
-     */
-    public function getLigneCommandes(): Collection
-    {
-        return $this->ligneCommandes;
-    }
-
-    public function addLigneCommande(LigneCommande $ligneCommande): self
-    {
-        if (!$this->ligneCommandes->contains($ligneCommande)) {
-            $this->ligneCommandes[] = $ligneCommande;
-            $ligneCommande->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLigneCommande(LigneCommande $ligneCommande): self
-    {
-        if ($this->ligneCommandes->contains($ligneCommande)) {
-            $this->ligneCommandes->removeElement($ligneCommande);
-            // set the owning side to null (unless already changed)
-            if ($ligneCommande->getProduct() === $this) {
-                $ligneCommande->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
 }
