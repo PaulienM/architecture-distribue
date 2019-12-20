@@ -7,7 +7,7 @@ use App\Entity\Commande;
 use App\Entity\LigneCommande;
 use App\Entity\User;
 use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -38,13 +38,14 @@ class PanierService
     /**
      * PanierService constructor.
      *
-     * @param SessionInterface  $session
-     * @param ProductRepository $repo
+     * @param SessionInterface       $session
+     * @param ProductRepository      $repo
+     * @param EntityManagerInterface $em
      */
     public function __construct(
         SessionInterface $session,
         ProductRepository $repo,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         $this->session = $session;
         $this->repo = $repo;
