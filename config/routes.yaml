@@ -101,3 +101,15 @@ user.inscription:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
+
+app.logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+app.login:
+    path: /{_locale}/login
+    controller: App\Controller\SecurityController::login
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'

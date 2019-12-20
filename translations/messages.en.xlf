@@ -73,6 +73,10 @@
         <source>registration</source>
         <target>Registration</target>
       </trans-unit>
+      <trans-unit id="ACcM9j_" resname="logout">
+        <source>logout</source>
+        <target>Logout</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

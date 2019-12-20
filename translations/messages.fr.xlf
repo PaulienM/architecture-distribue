@@ -62,16 +62,20 @@
         <target>Panier</target>
       </trans-unit>
       <trans-unit id="BPiZbad" resname="user">
-        <source>__user</source>
+        <source>user</source>
         <target>Utilisateur</target>
       </trans-unit>
       <trans-unit id="mvIRMps" resname="account">
-        <source>__account</source>
+        <source>account</source>
         <target>Compte</target>
       </trans-unit>
       <trans-unit id="KcnDDgY" resname="registration">
-        <source>__registration</source>
+        <source>registration</source>
         <target>Inscription</target>
+      </trans-unit>
+      <trans-unit id="ACcM9j_" resname="logout">
+        <source>logout</source>
+        <target>Déconnexion</target>
       </trans-unit>
     </body>
   </file>
