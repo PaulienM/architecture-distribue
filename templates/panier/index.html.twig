@@ -19,7 +19,7 @@
             {% set product = item['item'] %}
             {% set quantity = item['quantity'] %}
             <tr>
-                <td>{{ product.libelle }}</td>
+                <td><img src="{{ asset(product.visuel) }}" alt="{{ product.libelle }}" height="50px">{{ product.libelle }}</td>
                 <td>{{ product.prix | price }}</td>
                 <td>
                     <a href="{{ path('panier.enlever', {productId: product.id}) }}">
