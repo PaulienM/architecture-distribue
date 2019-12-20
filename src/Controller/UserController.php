@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/user")
@@ -45,11 +46,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param Request                      $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
      *
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -57,6 +59,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
 
