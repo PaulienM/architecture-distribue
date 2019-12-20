@@ -78,6 +78,14 @@ panier.vider:
     defaults:
         _locale: 'fr'
 
+panier.valider:
+    path: /{_locale}/user/panier/valider
+    controller: App\Controller\PanierController::validerPanier
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
+
 user.accueil:
     path: /{_locale}/user/
     controller: App\Controller\UserController::index
@@ -87,7 +95,7 @@ user.accueil:
         _locale: 'fr'
 
 user.inscription:
-    path: /{_locale}/user/new
+    path: /{_locale}/inscription
     controller: App\Controller\UserController::new
     requirements:
         _locale: '%app.supported_locales%'

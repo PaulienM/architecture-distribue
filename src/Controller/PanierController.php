@@ -109,4 +109,10 @@ class PanierController extends AbstractController
             ]
         );
     }
+
+    public function validerPanier()
+    {
+        $this->panierService->panierToCommande($this->getUser());
+        return $this->redirectToRoute('panier');
+    }
 }

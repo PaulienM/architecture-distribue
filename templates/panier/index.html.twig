@@ -40,6 +40,7 @@
         </tbody>
     </table>
     <h2>Total : {{ prix | price }}</h2>
+        <a href="{{ path('panier.valider') }}" class="btn btn-primary">Valider le panier</a>
     {% else %}
     <p>Le panier est vide.</p>
     {% endif %}
