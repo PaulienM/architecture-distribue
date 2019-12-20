@@ -5,19 +5,26 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
-use App\Service\BoutiqueService;
 use App\Service\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PanierController extends AbstractController
 {
-    public function index(
-        PanierService $panierService
-    ) {
+    /**
+     * @var PanierService
+     */
+    private $panierService;
+
+    public function __construct(PanierService $panierService)
+    {
+        $this->panierService = $panierService;
+    }
+
+    public function index() {
         $panierWithItems = [];
-        $panier          = $panierService->getContenu();
+        $panier          = $this->panierService->getContenu();
         try {
-            $prixTotal = $panierService->getTotal();
+            $prixTotal = $this->panierService->getTotal();
         } catch (\Exception $e) {
             throw $this->createNotFoundException($e->getMessage());
         }
@@ -39,10 +46,10 @@ class PanierController extends AbstractController
         );
     }
 
-    public function panierAjouter(PanierService $panierService, $productId)
+    public function panierAjouter(int $productId)
     {
         try {
-            $panierService->ajouterProduit($productId);
+            $this->panierService->ajouterProduit($productId);
         } catch (\Exception $e) {
             throw $this->createNotFoundException($e->getMessage());
         }
@@ -50,10 +57,10 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 
-    public function panierEnlever(PanierService $panierService, $productId)
+    public function panierEnlever(int $productId)
     {
         try {
-            $panierService->enleverProduit($productId);
+            $this->panierService->enleverProduit($productId);
         } catch (\Exception $e) {
             throw $this->createNotFoundException($e->getMessage());
         }
@@ -61,10 +68,10 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 
-    public function panierSupprimer(PanierService $panierService, $productId)
+    public function panierSupprimer(int $productId)
     {
         try {
-            $panierService->supprimerProduit($productId);
+            $this->panierService->supprimerProduit($productId);
         } catch (\Exception $e) {
             throw $this->createNotFoundException($e->getMessage());
         }
@@ -72,16 +79,16 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('panier');
     }
 
-    public function panierVider(PanierService $panierService)
+    public function panierVider()
     {
-        $panierService->vider();
+        $this->panierService->vider();
 
         return $this->redirectToRoute('panier');
     }
 
-    public function afficherNavbar(PanierService $panierService)
+    public function afficherNavbar()
     {
-        $nbProduits = $panierService->getNbProduits();
+        $nbProduits = $this->panierService->getNbProduits();
 
         return $this->render(
             'panier/nbProduits_navbar.html.twig',
@@ -91,11 +98,9 @@ class PanierController extends AbstractController
         );
     }
 
-    public function afficherNbProduit(
-        PanierService $panierService,
-        int $productId
-    ) {
-        $nbProduit = $panierService->getNbProduit($productId);
+    public function afficherNbProduit(int $productId)
+    {
+        $nbProduit = $this->panierService->getNbProduit($productId);
 
         return $this->render(
             'panier/nbProduits_boutique.html.twig',
