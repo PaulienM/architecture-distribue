@@ -27,12 +27,14 @@ class BoutiqueController extends AbstractController
     public function rayon(PanierService $panierService, int $idCategory)
     {
         $products = $this->getDoctrine()->getRepository(Product::class)->findByCategory($idCategory);
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($idCategory);
         if (!$products) {
             throw $this->createNotFoundException('Le produit n\'existe pas');
         }
 
         return $this->render('boutique/rayon.html.twig', [
-            "products" => $products
+            "products" => $products,
+            "category" => $category
         ]);
     }
 
