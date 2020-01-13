@@ -77,6 +77,10 @@
         <source>logout</source>
         <target>Déconnexion</target>
       </trans-unit>
+      <trans-unit id="QoghNQ6" resname="login">
+        <source>login</source>
+        <target>Connexion</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

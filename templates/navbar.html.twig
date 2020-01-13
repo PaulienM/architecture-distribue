@@ -21,9 +21,13 @@
                     {{ 'user' | trans }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('user.accueil') }}">{{ 'account' | trans }}</a>
-                    <a class="dropdown-item" href="{{ path('user.inscription') }}">{{ 'registration' | trans }}</a>
-                    <a class="dropdown-item" href="{{ path('app.logout') }}">{{ 'logout' | trans }}</a>
+                    {% if not app.user %}
+                        <a class="dropdown-item" href="{{ path('app.login') }}">{{ 'login' | trans }}</a>
+                        <a class="dropdown-item" href="{{ path('user.inscription') }}">{{ 'registration' | trans }}</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{{ path('user.accueil') }}">{{ 'account' | trans }}</a>
+                        <a class="dropdown-item" href="{{ path('app.logout') }}">{{ 'logout' | trans }}</a>
+                    {% endif %}
                 </div>
             </li>
         </ul>
