@@ -5,12 +5,28 @@
 {% block body %}
     <h1>Utilisateur</h1>
     <div class="jumbotron">
-        {% if user is not null %}
-            <h2>Bonjour {{ user.prenom }} {{ user.nom }}</h2>
-        {% else %}
-            <h2>Aucun utilisateur trouvé</h2>
-        {% endif %}
-
+        <p>Bonjour {{ user.prenom }} {{ user.nom }}</p>
+        <h2>Vos commandes</h2>
+        <ul class="">
+            {% for commande in commandes %}
+                <div class="mb-2">
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapse{{ commande.id }}" aria-expanded="false" aria-controls="collapseExample">
+                        <b>#{{ commande.id }}</b>
+                    </a>
+                    <div class="collapse" id="collapse{{ commande.id }}">
+                        <div class="card card-body">
+                            {% for ligne in commande.ligneCommandes %}
+                                <div>
+                                    {{ ligne.product.libelle }} x{{ ligne.quantite }} ({{ ligne.prix | price }})
+                                </div>
+                            {% endfor %}
+                            <p>Commandé le {{ commande.dateCommande | date('d/m/Y') }}</p>
+                            <p>Statut : {{ commande.statut }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}

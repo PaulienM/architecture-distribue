@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -35,8 +36,11 @@ class UserController extends AbstractController
     public function index(): Response
     {
         if ($this->getUser()) {
+            $commandes = $this->getDoctrine()->getRepository(Commande::class)
+                              ->findBy(['User' => $this->getUser()]);
             return $this->render('user/index.html.twig', [
                 'user' => $this->getUser(),
+                'commandes' => $commandes
             ]);
         } else {
             return $this->redirectToRoute('app.login');
