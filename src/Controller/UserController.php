@@ -34,9 +34,13 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('user/index.html.twig', [
-            'user' => $this->getUser(),
-        ]);
+        if ($this->getUser()) {
+            return $this->render('user/index.html.twig', [
+                'user' => $this->getUser(),
+            ]);
+        } else {
+            return $this->redirectToRoute('app.login');
+        }
     }
 
     /**
@@ -47,6 +51,9 @@ class UserController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('user.accueil');
+        }
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
