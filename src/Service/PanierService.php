@@ -34,6 +34,10 @@ class PanierService
      * @var EntityManager
      */
     private $em;
+    /**
+     * @var MailService
+     */
+    private $mail_service;
 
     /**
      * PanierService constructor.
@@ -41,16 +45,19 @@ class PanierService
      * @param SessionInterface       $session
      * @param ProductRepository      $repo
      * @param EntityManagerInterface $em
+     * @param MailService            $mail_service
      */
     public function __construct(
         SessionInterface $session,
         ProductRepository $repo,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        MailService $mail_service
     ) {
         $this->session = $session;
         $this->repo = $repo;
         $this->panier = $this->session->get(self::PANIER_SESSION, []);
         $this->em = $em;
+        $this->mail_service = $mail_service;
     }
 
     /**
@@ -185,6 +192,7 @@ class PanierService
             }
             $this->em->persist($commande);
             $this->em->flush();
+            $this->mail_service->sendConfirmationEmail($commande);
             $this->vider();
         }
     }
