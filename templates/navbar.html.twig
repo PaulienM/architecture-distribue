@@ -41,8 +41,8 @@
                     <i class="fas fa-globe-africa"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('home', {_locale: 'fr'}) }}">fr</a>
-                    <a class="dropdown-item" href="{{ path('home', {_locale: 'en'}) }}">en</a>
+                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'fr'})) }}">fr</a>
+                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'en'})) }}">en</a>
                 </div>
             </li>
         </ul>
