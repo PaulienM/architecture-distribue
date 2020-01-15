@@ -20,7 +20,7 @@
                                     {{ ligne.product.libelle }} x{{ ligne.quantite }} ({{ ligne.prix | price }})
                                 </div>
                             {% endfor %}
-                            <p>Commandé le {{ commande.dateCommande | date('d/m/Y') }}</p>
+                            <p>Commandé le {{ commande.dateCommande | date('d/m/Y \\à H:i') }}</p>
                             <p>Statut : {{ commande.statut }}</p>
                         </div>
                     </div>

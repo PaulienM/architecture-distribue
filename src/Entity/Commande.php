@@ -25,7 +25,7 @@ class Commande
     private $User;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateCommande;
 
