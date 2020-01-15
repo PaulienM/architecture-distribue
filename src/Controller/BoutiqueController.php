@@ -48,4 +48,15 @@ class BoutiqueController extends AbstractController
             "products" => $products
         ]);
     }
+
+    public function plusVendu()
+    {
+        $listPlusVendu = $this->getDoctrine()
+                         ->getRepository(Product::class)
+                         ->findMostCommandedProducts();
+
+        return $this->render('boutique/plusVendu.html.twig', [
+            "listPlusVendu" => $listPlusVendu
+        ]);
+    }
 }

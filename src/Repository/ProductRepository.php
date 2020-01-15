@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\LigneCommande;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -26,6 +27,18 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('search', '%'.$searchText.'%')
             ->orWhere('p.texte LIKE :search')
             ->setParameter('search', '%'.$searchText.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findMostCommandedProducts(int $limit = 4)
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('SUM(lComm.quantite) as quantite')
+            ->join('p.ligneCommandes', 'lComm')
+            ->groupBy('lComm.product')
+            ->orderBy('quantite', 'DESC')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

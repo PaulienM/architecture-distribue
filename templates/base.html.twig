@@ -11,9 +11,16 @@
 {{ include('navbar.html.twig') }}
 {% block beforeContainer %}{% endblock %}
 <div class="container">
-    {% block body %}
-        <h1>{{ 'base.default_body' | trans }}</h1>
-    {% endblock %}
+    <div class="row">
+        <div class="col-md-10">
+            {% block body %}
+                <h1>{{ 'base.default_body' | trans }}</h1>
+            {% endblock %}
+        </div>
+        <div class="col-md-2">
+            {{ render(controller('App\\Controller\\BoutiqueController::plusVendu')) }}
+        </div>
+    </div>
 </div>
 {{ encore_entry_script_tags('app') }}
 {% block javascripts %}{% endblock %}

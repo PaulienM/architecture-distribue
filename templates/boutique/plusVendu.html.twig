@@ -1,0 +1,9 @@
+<div class="jumbotron mt-5">
+    {% for plusVendu in listPlusVendu %}
+        {% set product = plusVendu[0] %}
+        <div class="card">
+                <img src="{{ asset(product.visuel) }}" alt="" class="card-img-top">
+                {{ product.libelle }}: {{ plusVendu.quantite }} commandes
+        </div>
+    {% endfor %}
+</div>
