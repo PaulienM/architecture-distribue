@@ -113,3 +113,6 @@ app.login:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: 'fr'
+
+captcha_routing:
+    resource: "@CaptchaBundle/Resources/config/routing.yml"
