@@ -17,7 +17,7 @@
                         <div class="card card-body">
                             {% for ligne in commande.ligneCommandes %}
                                 <div>
-                                    {{ ligne.product.libelle }} x{{ ligne.quantite }} ({{ ligne.prix | price }})
+                                    {{ ligne.product.libelle }} x{{ ligne.quantite }} ({{ ligne.prix | currency_convert | format_currency(app.session.get('currency')) }})
                                 </div>
                             {% endfor %}
                             <p>Commandé le {{ commande.dateCommande | date('d/m/Y \\à H:i') }}</p>

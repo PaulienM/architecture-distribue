@@ -114,5 +114,13 @@ app.login:
     defaults:
         _locale: 'fr'
 
+devise.change:
+    path: /{_locale}/changer-devise/{devise}/{route}/{route_parameters}
+    controller: App\Controller\MonnaieController::choisirMonnaie
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: 'fr'
+
 captcha_routing:
     resource: "@CaptchaBundle/Resources/config/routing.yml"

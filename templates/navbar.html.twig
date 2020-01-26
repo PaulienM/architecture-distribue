@@ -11,13 +11,15 @@
                 <a class="nav-link" href="{{ path('boutique') }}">{{ 'store' | trans }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('panier') }}">{{ 'cart' | trans }}{{ render(controller('App\\Controller\\PanierController::afficherNavbar')) }}</a>
+                <a class="nav-link"
+                   href="{{ path('panier') }}">{{ 'cart' | trans }}{{ render(controller('App\\Controller\\PanierController::afficherNavbar')) }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('contact') }}">{{ 'contact' | trans }}</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     {{ 'user' | trans }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -32,17 +34,36 @@
             </li>
         </ul>
         <form action="{{ path('search') }}" method="get" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" id="searchText" name="search" type="search" placeholder="{{ 'navbar.search_product' | trans }}" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+            <input class="form-control mr-sm-2" id="searchText" name="search" type="search"
+                   placeholder="{{ 'navbar.search_product' | trans }}" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id="searchButton"><i
+                        class="fas fa-search"></i></button>
         </form>
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-globe-africa"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'fr'})) }}">fr</a>
-                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'en'})) }}">en</a>
+                <div class="dropdown-menu" aria-labelledby="langDropdown">
+                    <a class="dropdown-item"
+                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'fr'})) }}">fr</a>
+                    <a class="dropdown-item"
+                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'en'})) }}">en</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="currencyDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i>{{ app.session.get('currency')?:'EUR' }}</i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="currencyDropdown">
+                    {% for currency in currencies %}
+                        <a class="dropdown-item"
+                           href="{{ path('devise.change', {devise: currency, route: app.request.attributes.get('_route'), route_parameters: app.request.attributes.get('_route_params')|url_encode}) }}">
+                            {{ currency }}
+                        </a>
+                    {% endfor %}
                 </div>
             </li>
         </ul>

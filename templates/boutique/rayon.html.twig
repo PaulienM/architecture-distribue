@@ -15,7 +15,7 @@
                     <a href="{{ path('panier.ajouter', { productId: product.id }) }}" class="btn btn-success">Ajouter au panier {{ render(controller('App\\Controller\\PanierController::afficherNbProduit', {productId: product.id})) }}</a>
                 </div>
                 <div class="card-footer text-muted">
-                    {{ product.prix|price }}
+                    {{ product.prix | currency_convert | format_currency(app.session.get('currency')) }}
                 </div>
             </div>
         </div>
