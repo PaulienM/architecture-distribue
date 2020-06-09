@@ -8,12 +8,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Captcha\Bundle\CaptchaBundle\Validator\Constraints as CaptchaAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ApiResource()
+ *  @ApiResource(
+ *     normalizationContext={"groups"={"read"}},
+ *     denormalizationContext={"groups"={"write"}},
+ * )
  */
 class User implements UserInterface
 {
@@ -21,6 +25,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 
@@ -29,6 +34,7 @@ class User implements UserInterface
      * @Assert\Email(
      *     message="L'email '{{ value }}' n'est pas valide."
      * )
+     * @Groups({"read", "write"})
      */
     private $email;
 
@@ -44,22 +50,26 @@ class User implements UserInterface
      *     min = 8,
      *     minMessage = "Votre mot de passe doit contenir au moins {{ limit }} charactères"
      * )
+     * @Groups({"read", "write"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read", "write"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read", "write"})
      */
     private $prenom;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="User")
      * @ApiSubresource()
+     * @Groups({"read"})
      */
     private $commandes;
 
