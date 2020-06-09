@@ -2,12 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ApiResource()
+ * @ApiFilter(RangeFilter::class, properties={"prix"})
+ * @ApiFilter(OrderFilter::class, properties={"prix": "ASC"})
+ * @ApiFilter(SearchFilter::class, properties={"libelle": "exact", "texte": "partial"})
  */
 class Product
 {
@@ -40,11 +49,13 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
+     * @ApiSubresource()
      */
     private $category;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\LigneCommande", mappedBy="product")
+     * @ApiSubresource()
      */
     private $ligneCommandes;
 
