@@ -1,14 +1,9 @@
 <?php
 
 
-namespace App\Soap;
+namespace SoapClient;
 
-/**
- * Class UserSoap
- *
- * @package App\Soap
- */
-class UserSoap
+class User
 {
     /**
      * @var int

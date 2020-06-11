@@ -15,8 +15,8 @@ class SoapGenController
      */
     public function soapGenAction()
     {
-        $wsdl = new Wsdl("/soap.wdsl", 'http://localhost:8000/soap');
-        $wsdl->addComplexType('\App\Soap\UserSoap');
+        //$wsdl = new Wsdl("/soap.wdsl", 'http://localhost:8000/soap');
+        //$wsdl->addComplexType('\App\Soap\UserSoap');
         $autodiscover = new AutoDiscover();
 
         $autodiscover->setClass('App\Soap\SoapClass')

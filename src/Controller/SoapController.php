@@ -40,4 +40,3 @@ class SoapController extends AbstractController
         return $response;
     }
 }
-?>

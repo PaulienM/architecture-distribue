@@ -188,7 +188,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Commande[]
+     * @return Collection<Commande>
      */
     public function getCommandes(): Collection
     {
